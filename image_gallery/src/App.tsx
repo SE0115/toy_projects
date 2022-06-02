@@ -21,18 +21,24 @@ function App() {
         )}
         <input
           type="file"
+          multiple
           ref={inputRef}
           onChange={(event) => {
-            const file = event.target.files?.[0];
-            if (file) {
-              const reader = new FileReader();
-              reader.readAsDataURL(file);
-              reader.onloadend = (event) => {
-                setImageList((prev) => [
-                  ...prev,
-                  event.target?.result as string,
-                ]);
-              };
+            const fileCnt = event.target.files?.length;
+            if (fileCnt) {
+              for (let i = 0; i < fileCnt; i++) {
+                const file = event.target.files?.[i];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(file);
+                  reader.onloadend = (event) => {
+                    setImageList((prev) => [
+                      ...prev,
+                      event.target?.result as string,
+                    ]);
+                  };
+                }
+              }
             }
           }}
         />
