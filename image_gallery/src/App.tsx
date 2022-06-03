@@ -98,7 +98,12 @@ function App() {
         ref={dragRef}
       >
         {imageList.map((img, idx) => (
-          <ImageBox key={idx} src={img} />
+          <ImageBox
+            key={idx}
+            src={img}
+            imageList={imageList}
+            setImageList={setImageList}
+          />
         ))}
         {imageList.length === 0 && (
           <div className="notice">
